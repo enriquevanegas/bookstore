@@ -52,12 +52,13 @@ const Home = () => {
                         </thead>
                         <tbody>
                             {books.map((book, index) => {
-                                <tr key={book._id} className="h-8">
-                                    <th className="border border-slate-700 rounded-md text-center">{index + 1}</th>
+                                const rowNumber = (index + 1 < 10) ? `0${index + 1}` : (index + 1);
+                                return (<tr key={book._id} className="h-8">
+                                    <th className="border border-slate-700 rounded-md text-center">{rowNumber}</th>
                                     <th className="border border-slate-700 rounded-md text-center">{book.title}</th>
                                     <th className="border border-slate-700 rounded-md text-center">{book.author}</th>
                                     <th className="border border-slate-700 rounded-md text-center">{book.publishYear}</th>
-                                    <th className="border border-slate-700 rounded-md text-center">{
+                                    <th className="border border-slate-700 rounded-md text-center">
                                         <div className="flex justify-center gap-x-4">
                                             <Link to={`/books/details/${book._id}`}>
                                                 <BsInfoCircle className='text-2xl text-green-800' />
@@ -65,12 +66,12 @@ const Home = () => {
                                             <Link to={`/books/edit/${book._id}`}>
                                                 <AiOutlineEdit className='text-2xl text-yellow-800' />
                                             </Link>
-                                            <Link to={`/books/details/${book._id}`}>
-                                                <MdOutlineDelete text-2xl text-red-800 />
+                                            <Link to={`/books/delete/${book._id}`}>
+                                                <MdOutlineDelete className='text-2xl text-red-800' />
                                             </Link>
                                         </div>
-                                    }</th>
-                                </tr>
+                                    </th>
+                                </tr>);
                             })}
                         </tbody>
                     </table>)
